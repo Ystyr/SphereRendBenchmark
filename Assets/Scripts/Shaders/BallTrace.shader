@@ -68,9 +68,10 @@ Shader "Unlit/BallTrace"
 
             fixed sphIntersect(fixed3 ro, fixed3 rd, fixed r)
             {
-                fixed discr = dot(ro, rd) * dot(ro, rd) - (dot(ro, ro) - r * r);
+                fixed dif = dot(ro, rd);
+                fixed discr = dif * dif - (dot(ro, ro) - r * r);
                 if (discr >= 0.)
-                    return -dot(rd, ro) - Q_rsqrt(discr);
+                    return -dif -Q_rsqrt(discr);
 
                 return -1.;
             }
